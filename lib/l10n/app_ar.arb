@@ -6,5 +6,7 @@
     "radio":"راديو",
     "settings":"الاعدادات",
     "suraName":"اسم السوره",
-    "versesNumber":"عدد الايات"
+    "versesNumber":"عدد الايات",
+    "lightMode":"فاتح",
+    "darkMode":"داكن"
 }

@@ -6,5 +6,7 @@
     "radio":"radio",
     "settings":"Settings",
     "suraName":"sura name",
-    "versesNumber":"versesNumber"
+    "versesNumber":"versesNumber",
+    "lightMode":"Light",
+    "darkMode":"Dark"
 }

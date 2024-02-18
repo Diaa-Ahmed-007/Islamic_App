@@ -2,22 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:islamiy_app/UI/providers/settings_provider.dart';
 import 'package:islamiy_app/UI/settings/widgets/language_sheet.dart';
 import 'package:islamiy_app/UI/settings/widgets/theme_sheet.dart';
-import 'package:islamiy_app/main.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-     SettingsProvider provider = Provider.of<SettingsProvider>(context);
+    SettingsProvider provider = Provider.of<SettingsProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Language',
+            provider.Language == "en" ? 'Language' : 'اللغات',
             style: Theme.of(context).textTheme.bodyLarge,
           ),
           const SizedBox(
@@ -35,7 +34,7 @@ class SettingsScreen extends StatelessWidget {
                   )),
               padding: const EdgeInsets.all(16),
               child: Text(
-                'English',
+                provider.Language == "en" ? 'English' : 'العربيه',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
@@ -44,7 +43,7 @@ class SettingsScreen extends StatelessWidget {
             height: 30,
           ),
           Text(
-            'Theme',
+            provider.Language == "en" ? 'Theme' : 'السمات',
             style: Theme.of(context).textTheme.bodyLarge,
           ),
           const SizedBox(
@@ -62,7 +61,7 @@ class SettingsScreen extends StatelessWidget {
                   )),
               padding: const EdgeInsets.all(16),
               child: Text(
-                provider.theme==ThemeMode.dark?'Dark':'Light',
+                provider.theme == ThemeMode.dark ? AppLocalizations.of(context)!.darkMode :AppLocalizations.of(context)!.lightMode,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),

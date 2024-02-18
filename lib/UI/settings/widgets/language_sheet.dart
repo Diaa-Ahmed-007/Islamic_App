@@ -1,20 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:islamiy_app/UI/providers/settings_provider.dart';
+import 'package:provider/provider.dart';
 
 class LanguageSheet extends StatelessWidget {
   const LanguageSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider provider = Provider.of<SettingsProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          selectedLanguage(context, 'English'),
+          selectedLanguage(
+              context, provider.Language == "en" ? 'English' : 'العربيه'),
           const SizedBox(
             height: 15,
           ),
-          unSelectedLanguage('Arabic', context),
+          InkWell(
+              onTap: () {
+                provider
+                    .changeLanguage(provider.Language == "en" ? "ar" : "en");
+              },
+              child: unSelectedLanguage(
+                  provider.Language == "en" ? 'العربيه' : 'English', context)),
         ],
       ),
     );
