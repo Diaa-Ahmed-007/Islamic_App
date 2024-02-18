@@ -35,7 +35,7 @@ class SettingsScreen extends StatelessWidget {
                   )),
               padding: const EdgeInsets.all(16),
               child: Text(
-                'English',
+                provider.Language=="en"?'English':'Arabic',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
