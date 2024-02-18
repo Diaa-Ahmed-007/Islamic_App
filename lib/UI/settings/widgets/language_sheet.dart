@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:islamiy_app/UI/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
+
 class LanguageSheet extends StatelessWidget {
   const LanguageSheet({super.key});
 
@@ -13,17 +13,18 @@ class LanguageSheet extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          selectedLanguage(context, provider.Language=="en"?'English':'Arabic'),
+          selectedLanguage(
+              context, provider.Language == "en" ? 'English' : 'العربيه'),
           const SizedBox(
             height: 15,
           ),
           InkWell(
-              onTap: (){
-                provider.changeLanguage(provider.Language=="en"
-                    ?provider.Language="ar"
-                    :provider.Language="en");
+              onTap: () {
+                provider
+                    .changeLanguage(provider.Language == "en" ? "ar" : "en");
               },
-              child: unSelectedLanguage(provider.Language=="en"?'Arabic':'English', context)),
+              child: unSelectedLanguage(
+                  provider.Language == "en" ? 'العربيه' : 'English', context)),
         ],
       ),
     );

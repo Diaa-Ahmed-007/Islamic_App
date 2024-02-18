@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islamiy_app/UI/providers/settings_provider.dart';
-import 'package:islamiy_app/main.dart';
 import 'package:provider/provider.dart';
 
 class ThemeSheet extends StatelessWidget {
@@ -14,7 +14,11 @@ class ThemeSheet extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          selectedTheme(provider.theme == ThemeMode.dark ? 'Dark' : 'Light',context),
+          selectedTheme(
+              provider.theme == ThemeMode.dark
+                  ? AppLocalizations.of(context)!.darkMode
+                  : AppLocalizations.of(context)!.lightMode,
+              context),
           const SizedBox(
             height: 15,
           ),
@@ -25,13 +29,16 @@ class ThemeSheet extends StatelessWidget {
                     : ThemeMode.dark);
               },
               child: unselectedTheme(
-                  provider.theme == ThemeMode.dark ? 'Light' : 'Dark',context)),
+                  provider.theme == ThemeMode.dark
+                      ? AppLocalizations.of(context)!.lightMode
+                      : AppLocalizations.of(context)!.darkMode,
+                  context)),
         ],
       ),
     );
   }
 
-  Widget selectedTheme(String language,BuildContext context) {
+  Widget selectedTheme(String language, BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -51,7 +58,7 @@ class ThemeSheet extends StatelessWidget {
     );
   }
 
-  Widget unselectedTheme(String language,BuildContext context) {
+  Widget unselectedTheme(String language, BuildContext context) {
     return Text(
       language,
       style: Theme.of(context).textTheme.labelSmall,
