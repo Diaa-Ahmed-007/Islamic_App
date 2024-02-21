@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:islamiy_app/UI/home/home_screen.dart';
+import 'package:islamiy_app/UI/providers/settings_provider.dart';
+import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -25,12 +27,15 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider provider = Provider.of<SettingsProvider>(context);
     return Scaffold(
       body: SizedBox(
         height: double.infinity,
         width: double.infinity,
         child: Image.asset(
-          'assets/images/Group 8.png',
+          provider.currentTheme == 'dark'
+              ? "assets/images/splashDark.png"
+              : 'assets/images/Group 8.png',
           fit: BoxFit.fill,
         ),
       ),

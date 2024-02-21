@@ -249,9 +249,9 @@ class QuranWidget extends StatelessWidget {
         ),
         Row(
           children: [
-             Expanded(
+            Expanded(
               child: Text(
-                " عدد الايات",
+                "اسم السوره",
                 style: Theme.of(context).textTheme.bodyLarge,
                 textAlign: TextAlign.center,
               ),
@@ -261,9 +261,9 @@ class QuranWidget extends StatelessWidget {
               height: 45,
               color: Theme.of(context).colorScheme.primary,
             ),
-             Expanded(
+            Expanded(
                 child: Text(
-              "اسم السوره",
+              " عدد الايات",
               style: Theme.of(context).textTheme.bodyLarge,
               textAlign: TextAlign.center,
             )),

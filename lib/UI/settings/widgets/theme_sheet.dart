@@ -15,7 +15,7 @@ class ThemeSheet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           selectedTheme(
-              provider.theme == ThemeMode.dark
+              provider.getThemeMode() == ThemeMode.dark
                   ? AppLocalizations.of(context)!.darkMode
                   : AppLocalizations.of(context)!.lightMode,
               context),
@@ -24,12 +24,11 @@ class ThemeSheet extends StatelessWidget {
           ),
           InkWell(
               onTap: () {
-                provider.changeTheme(provider.theme == ThemeMode.dark
-                    ? ThemeMode.light
-                    : ThemeMode.dark);
+                provider.changeTheme(
+                    provider.currentTheme == 'dark' ? 'light' : 'dark');
               },
               child: unselectedTheme(
-                  provider.theme == ThemeMode.dark
+                  provider.getThemeMode() == ThemeMode.dark
                       ? AppLocalizations.of(context)!.lightMode
                       : AppLocalizations.of(context)!.darkMode,
                   context)),

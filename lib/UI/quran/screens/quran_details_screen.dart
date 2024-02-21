@@ -27,7 +27,7 @@ class _QuranDetailsScreenState extends State<QuranDetailsScreen> {
     return Container(
       decoration:  BoxDecoration(
         image: DecorationImage(
-          image: provider.theme==ThemeMode.dark
+          image: provider.currentTheme == 'dark'
               ? const AssetImage('assets/images/Dakbg.png')
               : const AssetImage('assets/images/bg3.png'),
         ),
