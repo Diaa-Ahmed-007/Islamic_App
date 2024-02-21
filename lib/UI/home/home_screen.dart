@@ -6,7 +6,6 @@ import 'package:islamiy_app/UI/quran/screens/quran_screen.dart';
 import 'package:islamiy_app/UI/radio/radio_screen.dart';
 import 'package:islamiy_app/UI/sebha/sebha_screen.dart';
 import 'package:islamiy_app/UI/settings/screens/settings_screen.dart';
-import 'package:islamiy_app/main.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,7 +17,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-      
   int index = 0;
   List<Widget> navWidget = [
     const QuranWidget(),
@@ -29,11 +27,11 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   @override
   Widget build(BuildContext context) {
-     SettingsProvider provider = Provider.of<SettingsProvider>(context);
+    SettingsProvider provider = Provider.of<SettingsProvider>(context);
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: provider.theme==ThemeMode.dark
+          image: provider.currentTheme == 'dark'
               ? const AssetImage('assets/images/Dakbg.png')
               : const AssetImage('assets/images/bg3.png'),
         ),

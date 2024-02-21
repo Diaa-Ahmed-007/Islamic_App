@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islamiy_app/UI/providers/settings_provider.dart';
 import 'package:islamiy_app/UI/settings/widgets/language_sheet.dart';
 import 'package:islamiy_app/UI/settings/widgets/theme_sheet.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
@@ -16,7 +17,7 @@ class SettingsScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            provider.Language == "en" ? 'Language' : 'اللغات',
+            provider.getLanguage() == "en" ? 'Language' : 'اللغات',
             style: Theme.of(context).textTheme.bodyLarge,
           ),
           const SizedBox(
@@ -34,7 +35,7 @@ class SettingsScreen extends StatelessWidget {
                   )),
               padding: const EdgeInsets.all(16),
               child: Text(
-                provider.Language == "en" ? 'English' : 'العربيه',
+                provider.getLanguage() == "en" ? 'English' : 'العربيه',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
@@ -43,7 +44,7 @@ class SettingsScreen extends StatelessWidget {
             height: 30,
           ),
           Text(
-            provider.Language == "en" ? 'Theme' : 'السمات',
+            provider.getLanguage() == "en" ? 'Theme' : 'السمات',
             style: Theme.of(context).textTheme.bodyLarge,
           ),
           const SizedBox(
@@ -61,7 +62,9 @@ class SettingsScreen extends StatelessWidget {
                   )),
               padding: const EdgeInsets.all(16),
               child: Text(
-                provider.theme == ThemeMode.dark ? AppLocalizations.of(context)!.darkMode :AppLocalizations.of(context)!.lightMode,
+                provider.getThemeMode() == ThemeMode.dark
+                    ? AppLocalizations.of(context)!.darkMode
+                    : AppLocalizations.of(context)!.lightMode,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),

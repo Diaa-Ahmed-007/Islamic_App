@@ -14,17 +14,18 @@ class LanguageSheet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           selectedLanguage(
-              context, provider.Language == "en" ? 'English' : 'العربيه'),
+              context, provider.getLanguage() == "en" ? 'English' : 'العربيه'),
           const SizedBox(
             height: 15,
           ),
           InkWell(
               onTap: () {
-                provider
-                    .changeLanguage(provider.Language == "en" ? "ar" : "en");
+                provider.changeLanguage(
+                    provider.getLanguage() == "en" ? "ar" : "en");
               },
               child: unSelectedLanguage(
-                  provider.Language == "en" ? 'العربيه' : 'English', context)),
+                  provider.getLanguage() == "en" ? 'العربيه' : 'English',
+                  context)),
         ],
       ),
     );

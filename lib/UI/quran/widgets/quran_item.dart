@@ -22,21 +22,21 @@ class QuranItem extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: Text(suraNumber,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyMedium),
-          ),
+              child: Text(
+            suraName,
+            style: Theme.of(context).textTheme.bodyMedium,
+            textAlign: TextAlign.center,
+          )),
           Container(
             width: 4,
             height: 45,
             color: Theme.of(context).colorScheme.primary,
           ),
           Expanded(
-              child: Text(
-            suraName,
-            style: Theme.of(context).textTheme.bodyMedium,
-            textAlign: TextAlign.center,
-          )),
+            child: Text(suraNumber,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyMedium),
+          ),
         ],
       ),
     );

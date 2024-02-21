@@ -10,9 +10,12 @@ import 'package:islamiy_app/UI/quran/screens/quran_details_screen.dart';
 import 'package:islamiy_app/UI/splash/splash_screen.dart';
 import 'package:provider/provider.dart';
 
-void main() {
-  runApp(ChangeNotifierProvider(
-      create: (context) => SettingsProvider(), child: const MyApp()));
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(ChangeNotifierProvider<SettingsProvider>(
+    child: const MyApp(),
+    create: (context) => SettingsProvider()..initialize(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -33,7 +36,7 @@ class MyApp extends StatelessWidget {
         Locale('en'), // English
         Locale('ar'), // Spanish
       ],
-      locale: Locale(provider.Language),
+      locale: Locale(provider.getLanguage()),
       routes: {
         HomeScreen.routeName: (_) => const HomeScreen(),
         SplashScreen.routeName: (_) => const SplashScreen(),
@@ -43,7 +46,7 @@ class MyApp extends StatelessWidget {
       initialRoute: SplashScreen.routeName,
       theme: LightTheme.themeData,
       darkTheme: DarkTheme.themeData,
-      themeMode: provider.theme,
+      themeMode: provider.getThemeMode(),
     );
   }
 }
