@@ -20,7 +20,13 @@ class SettingsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  initializeTheme() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    currentTheme = prefs.getString('theme') ?? 'system';
+    notifyListeners();
+  }
 
+  //-----------------------------------------------------------------------------------
   String currentLanguage = 'en';
   String getLanguage() {
     if (currentLanguage == 'ar') {
@@ -37,10 +43,24 @@ class SettingsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  initialize() async {
+  initializeLanguage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     currentLanguage = prefs.getString('newLanguage') ?? 'en';
-       currentTheme = prefs.getString('theme') ?? 'system';
+    notifyListeners();
+  }
+
+//-----------------------------------------------------------------------------------
+  String quranReaderName ="Abdelbari Al-Toubayti";
+  changeQuranReaderName(String newValue) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    quranReaderName = newValue;
+    await prefs.setString('newQuranReaderName', newValue);
+    notifyListeners();
+  }
+
+  initializeQuranReaderName() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    quranReaderName = prefs.getString('newQuranReaderName') ?? "Abdelbari Al-Toubayti";
     notifyListeners();
   }
 }

@@ -22,8 +22,8 @@ class _HomeScreenState extends State<HomeScreen> {
     const QuranWidget(),
     const AhadethScreen(),
     const SebhaWidget(),
-    const RadioWidget(),
-    const SettingsScreen(),
+    RadioWidget(),
+     SettingsScreen(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -31,10 +31,9 @@ class _HomeScreenState extends State<HomeScreen> {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: provider.currentTheme == 'dark'
-              ? const AssetImage('assets/images/Dakbg.png')
-              : const AssetImage('assets/images/bg3.png'),
-        ),
+            image: AssetImage(provider.currentTheme == 'dark'
+                ? 'assets/images/Dakbg.png'
+                : 'assets/images/bg3.png')),
       ),
       child: Scaffold(
         appBar: AppBar(

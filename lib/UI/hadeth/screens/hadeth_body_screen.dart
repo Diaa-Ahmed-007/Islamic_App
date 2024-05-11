@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:islamiy_app/UI/hadeth/models/hadeth_model.dart';
 import 'package:islamiy_app/UI/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class HadethDetailsScreen extends StatelessWidget {
   const HadethDetailsScreen({super.key});
   static const String routeName = 'HadethDetailsScreen';
@@ -22,8 +22,8 @@ class HadethDetailsScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-          title: const Text(
-            'Islami',
+          title:  Text(
+            AppLocalizations.of(context)!.islamy,
           ),
         ),
         body: hadethDetails.body.isEmpty

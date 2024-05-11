@@ -26,6 +26,7 @@ class ThemeSheet extends StatelessWidget {
               onTap: () {
                 provider.changeTheme(
                     provider.currentTheme == 'dark' ? 'light' : 'dark');
+                Navigator.pop(context);
               },
               child: unselectedTheme(
                   provider.getThemeMode() == ThemeMode.dark

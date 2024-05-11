@@ -22,6 +22,7 @@ class LanguageSheet extends StatelessWidget {
               onTap: () {
                 provider.changeLanguage(
                     provider.getLanguage() == "en" ? "ar" : "en");
+                Navigator.pop(context);
               },
               child: unSelectedLanguage(
                   provider.getLanguage() == "en" ? 'العربيه' : 'English',

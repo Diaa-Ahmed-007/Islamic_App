@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islamiy_app/UI/providers/settings_provider.dart';
 import 'package:islamiy_app/UI/quran/models/quran_details_model.dart';
-import 'package:islamiy_app/main.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
@@ -18,14 +18,14 @@ class QuranDetailsScreen extends StatefulWidget {
 class _QuranDetailsScreenState extends State<QuranDetailsScreen> {
   @override
   Widget build(BuildContext context) {
-     SettingsProvider provider = Provider.of<SettingsProvider>(context);
+    SettingsProvider provider = Provider.of<SettingsProvider>(context);
     final QuranDetailsModel details =
         ModalRoute.of(context)?.settings.arguments as QuranDetailsModel;
     if (lines.isEmpty) {
       readQuranFile(details.index);
     }
     return Container(
-      decoration:  BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
           image: provider.currentTheme == 'dark'
               ? const AssetImage('assets/images/Dakbg.png')
@@ -35,8 +35,8 @@ class _QuranDetailsScreenState extends State<QuranDetailsScreen> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-          title: const Text(
-            'Islami',
+          title: Text(
+            AppLocalizations.of(context)!.islamy,
           ),
         ),
         body: lines.isEmpty
