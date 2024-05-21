@@ -8,6 +8,7 @@ class LanguageSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SettingsProvider provider = Provider.of<SettingsProvider>(context);
+
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -22,6 +23,9 @@ class LanguageSheet extends StatelessWidget {
               onTap: () {
                 provider.changeLanguage(
                     provider.getLanguage() == "en" ? "ar" : "en");
+                provider.changeQuranReaderName(provider.getLanguage() == "ar"
+                    ? "Ahmed Amer"
+                    : "أحمد عامر");
                 Navigator.pop(context);
               },
               child: unSelectedLanguage(

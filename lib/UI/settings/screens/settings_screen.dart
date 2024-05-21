@@ -3,7 +3,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islamiy_app/UI/providers/settings_provider.dart';
 import 'package:islamiy_app/UI/settings/widgets/language_sheet.dart';
 import 'package:islamiy_app/UI/settings/widgets/quran_reader_sheet.dart';
-import 'package:islamiy_app/UI/settings/widgets/theme_sheet.dart';
 import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -51,27 +50,58 @@ class SettingsScreen extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          InkWell(
-            onTap: () => themeBouttonSheet(context),
-            child: Container(
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(
-                    width: 2,
-                    color: Theme.of(context).colorScheme.primary,
-                  )),
-              padding: const EdgeInsets.all(16),
-              child: Text(
-                provider.getThemeMode() == ThemeMode.dark
-                    ? AppLocalizations.of(context)!.darkMode
-                    : AppLocalizations.of(context)!.lightMode,
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  provider.getThemeMode() == ThemeMode.dark
+                      ? AppLocalizations.of(context)!.darkMode
+                      : AppLocalizations.of(context)!.lightMode,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                Switch(
+                  inactiveTrackColor: Colors.black54,
+                  inactiveThumbColor: Theme.of(context).colorScheme.primary,
+                  value:
+                      provider.getThemeMode() == ThemeMode.dark ? false : true,
+                  onChanged: (value) {
+                    provider.changeTheme(
+                        provider.currentTheme == 'dark' ? 'light' : 'dark');
+                  },
+                )
+              ],
             ),
           ),
+          // InkWell(
+          //   onTap: () => themeBouttonSheet(context),
+          //   child: Container(
+          //     alignment: Alignment.center,
+          //     decoration: BoxDecoration(
+          //         borderRadius: BorderRadius.circular(15),
+          //         border: Border.all(
+          //           width: 2,
+          //           color: Theme.of(context).colorScheme.primary,
+          //         )),
+          //     padding: const EdgeInsets.all(16),
+          //     child: Text(
+          //       provider.getThemeMode() == ThemeMode.dark
+          //           ? AppLocalizations.of(context)!.darkMode
+          //           : AppLocalizations.of(context)!.lightMode,
+          //       style: Theme.of(context).textTheme.bodyMedium,
+          //     ),
+          //   ),
+          // ),
           const SizedBox(
-            height: 150,
+            height: 60,
+          ),
+          Text(
+            provider.getLanguage() == "en" ? 'Sheikh name' : 'اسم القارئ',
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+          const SizedBox(
+            height: 10,
           ),
           InkWell(
             onTap: () => quranReaderBouttonSheet(context),
@@ -93,45 +123,6 @@ class SettingsScreen extends StatelessWidget {
               ),
             ),
           ),
-          // Container(
-          //   height: 60,
-          //   width: double.infinity,
-          //   decoration: BoxDecoration(
-          //     color: Colors.transparent,
-          //     border: Border.all(
-          //         color: Theme.of(context).colorScheme.primary, width: 1),
-          //   ),
-          //   child: Padding(
-          //     padding: const EdgeInsets.symmetric(horizontal: 16),
-          //     child: DropdownButton<String>(
-          //       dropdownColor: Theme.of(context).colorScheme.secondary,
-          //       value: provider.quranReaderName,
-          //       enableFeedback: false,
-          //       itemHeight: 100,
-          //       underline: const Text(""),
-          //       isExpanded: true,
-          //       iconEnabledColor: Theme.of(context).colorScheme.primary,
-          //       items: quranLisr
-          //           .map(
-          //             (e) => DropdownMenuItem<String>(
-          //               value: e,
-          //               child: Text(
-          //                 e,
-          //                 style: Theme.of(context)
-          //                     .textTheme
-          //                     .bodyLarge
-          //                     ?.copyWith(fontSize: 18),
-          //               ),
-          //             ),
-          //           )
-          //           .toList(),
-          //       onChanged: (value) {
-          //         provider
-          //             .changeQuranReaderName(value ?? "Abdelbari Al-Toubayti");
-          //       },
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );
@@ -141,7 +132,7 @@ class SettingsScreen extends StatelessWidget {
     showModalBottomSheet(
         context: context,
         builder: (context) {
-          return QuranReaderSheet();
+          return const QuranReaderSheet();
         });
   }
 
@@ -153,11 +144,11 @@ class SettingsScreen extends StatelessWidget {
         });
   }
 
-  void themeBouttonSheet(BuildContext context) {
-    showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return const ThemeSheet();
-        });
-  }
+  // void themeBouttonSheet(BuildContext context) {
+  //   showModalBottomSheet(
+  //       context: context,
+  //       builder: (context) {
+  //         return const ThemeSheet();
+  //       });
+  // }
 }

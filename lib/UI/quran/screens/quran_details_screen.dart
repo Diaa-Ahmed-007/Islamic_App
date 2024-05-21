@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:islamiy_app/UI/providers/quran_provider.dart';
 import 'package:islamiy_app/UI/providers/settings_provider.dart';
 import 'package:islamiy_app/UI/quran/models/quran_details_model.dart';
 import 'package:provider/provider.dart';
@@ -21,9 +22,13 @@ class _QuranDetailsScreenState extends State<QuranDetailsScreen> {
     SettingsProvider provider = Provider.of<SettingsProvider>(context);
     final QuranDetailsModel details =
         ModalRoute.of(context)?.settings.arguments as QuranDetailsModel;
+
     if (lines.isEmpty) {
       readQuranFile(details.index);
     }
+    QuranProvider quranProvider = Provider.of<QuranProvider>(context);
+    int number = details.index + 1;
+    var indexInThreeDiget = number.toString().padLeft(3, '0');
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -34,6 +39,7 @@ class _QuranDetailsScreenState extends State<QuranDetailsScreen> {
       ),
       child: Scaffold(
         appBar: AppBar(
+          elevation: 0,
           backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
           title: Text(
             AppLocalizations.of(context)!.islamy,
@@ -54,12 +60,32 @@ class _QuranDetailsScreenState extends State<QuranDetailsScreen> {
                       children: [
                         Text('سوره ${details.title}',
                             style: Theme.of(context).textTheme.displaySmall),
-                        const Padding(
-                          padding: EdgeInsets.only(left: 20),
-                          child: Icon(
-                            Icons.play_circle,
+                        InkWell(
+                          onTap: () {
+                            // await quranProvider.quranPlayer
+                            //     .play(
+                            //   UrlSource(
+                            //       "${quranPlayer[0].server}/$indexInThreeDiget.mp3"),
+                            // )
+                            //     .then(
+                            //   (value) async {
+                            //     quranProvider.totalDuration =
+                            //         await quranProvider.quranPlayer
+                            //                 .getDuration() ??
+                            //             Duration.zero;
+                            //   },
+                            // );
+                            // quranProvider.changeSuraIndex(details.index);
+                            // quranProvider.changeIsQuranPlaybarVisable(true);
+                            // quranProvider.changeIsQuranPlay(true);
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.only(left: 20),
+                            child: Icon(
+                              Icons.play_circle,
+                            ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                     Container(
@@ -93,9 +119,20 @@ class _QuranDetailsScreenState extends State<QuranDetailsScreen> {
   void readQuranFile(int index) async {
     String suraDetails =
         await rootBundle.loadString('assets/files/${index + 1}.txt');
-
     lines = suraDetails.trim().split('\n');
-    print(lines);
     setState(() {});
+  }
+
+  Widget audioPlayerBarVisabilty(BuildContext context) {
+    QuranProvider provider = Provider.of<QuranProvider>(context, listen: false);
+    if (provider.isQuranPlaybarVisable) {
+      return Container(
+        height: 70,
+        width: double.infinity,
+        color: Theme.of(context).colorScheme.primary,
+      );
+    } else {
+      return const Text("");
+    }
   }
 }

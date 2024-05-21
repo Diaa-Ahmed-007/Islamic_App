@@ -50,7 +50,7 @@ class SettingsProvider extends ChangeNotifier {
   }
 
 //-----------------------------------------------------------------------------------
-  String quranReaderName ="Abdelbari Al-Toubayti";
+  String quranReaderName = "Abdelbari Al-Toubayti";
   changeQuranReaderName(String newValue) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     quranReaderName = newValue;
@@ -60,7 +60,10 @@ class SettingsProvider extends ChangeNotifier {
 
   initializeQuranReaderName() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    quranReaderName = prefs.getString('newQuranReaderName') ?? "Abdelbari Al-Toubayti";
+    quranReaderName =
+        prefs.getString('newQuranReaderName') ?? "Abdelbari Al-Toubayti";
     notifyListeners();
   }
+
+ 
 }

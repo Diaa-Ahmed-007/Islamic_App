@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:islamiy_app/UI/providers/settings_provider.dart';
 import 'package:islamiy_app/json/model/QuranResponse.dart';
@@ -5,20 +6,25 @@ import 'package:islamiy_app/json/quran_sound.dart';
 import 'package:provider/provider.dart';
 
 class QuranReaderSheet extends StatefulWidget {
-  QuranReaderSheet({super.key});
+  const QuranReaderSheet({super.key});
 
   @override
   State<QuranReaderSheet> createState() => _QuranReaderSheetState();
 }
 
 class _QuranReaderSheetState extends State<QuranReaderSheet> {
-  late List<String> quranLisr;
+  late List<QuranModel> quranLisr;
+  final player = AudioPlayer();
   List<String> filter = [];
   late int index;
   @override
   void initState() {
     fillTheQuranList(context: context);
-    filter = quranLisr;
+    filter = quranLisr
+        .map(
+          (e) => e.name ?? "",
+        )
+        .toList();
     super.initState();
   }
 
@@ -38,10 +44,7 @@ class _QuranReaderSheetState extends State<QuranReaderSheet> {
               },
               cursorWidth: 1,
               cursorHeight: 22,
-              style: Theme.of(context)
-                  .textTheme
-                  .displayLarge
-                  ?.copyWith(fontSize: 22),
+              style: Theme.of(context).textTheme.headlineSmall,
               cursorColor: Theme.of(context).colorScheme.inversePrimary,
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.symmetric(vertical: 5),
@@ -56,8 +59,8 @@ class _QuranReaderSheetState extends State<QuranReaderSheet> {
                 hintText: "search",
                 hintStyle: Theme.of(context)
                     .textTheme
-                    .displayLarge
-                    ?.copyWith(fontSize: 20),
+                    .headlineSmall
+                    ?.copyWith(fontSize: 20, fontWeight: FontWeight.w300),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(35),
                   borderSide: const BorderSide(color: Colors.white54, width: 1),
@@ -85,6 +88,9 @@ class _QuranReaderSheetState extends State<QuranReaderSheet> {
   filterd(String value) {
     setState(() {
       filter = quranLisr
+          .map(
+            (e) => e.name ?? "",
+          )
           .where(
             (element) => element.contains(value),
           )
@@ -112,7 +118,7 @@ class _QuranReaderSheetState extends State<QuranReaderSheet> {
     );
   }
 
-  Widget unSelectedLanguage(List<String> quranLisr, BuildContext context) {
+  Widget unSelectedLanguage(List<QuranModel> quranLisr, BuildContext context) {
     SettingsProvider provider =
         Provider.of<SettingsProvider>(context, listen: false);
     return Expanded(
@@ -146,9 +152,15 @@ class _QuranReaderSheetState extends State<QuranReaderSheet> {
             : QuranSound.arabicQuranJson);
     quranLisr = response.reciters
             ?.map(
-              (e) => e.name ?? "",
+              (e) => QuranModel(name: e.name, url: e.server),
             )
             .toList() ??
         [];
   }
+}
+
+class QuranModel {
+  String? name;
+  String? url;
+  QuranModel({required this.name, required this.url});
 }
