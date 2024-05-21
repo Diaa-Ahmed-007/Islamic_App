@@ -5,14 +5,32 @@ import 'package:islamiy_app/UI/Themes/dark_theme.dart';
 import 'package:islamiy_app/UI/Themes/light_theme.dart';
 import 'package:islamiy_app/UI/hadeth/screens/hadeth_body_screen.dart';
 import 'package:islamiy_app/UI/home/home_screen.dart';
+import 'package:islamiy_app/UI/providers/quran_provider.dart';
+import 'package:islamiy_app/UI/providers/radio_provider.dart';
 import 'package:islamiy_app/UI/providers/settings_provider.dart';
 import 'package:islamiy_app/UI/quran/screens/quran_details_screen.dart';
 import 'package:islamiy_app/UI/splash/splash_screen.dart';
+import 'package:islamiy_app/api/api_manger.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(
-      create: (context) => SettingsProvider(), child: const MyApp()));
+  
+  ApiManger.init();
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider<SettingsProvider>(
+        create: (context) => SettingsProvider()
+          ..initializeLanguage()
+          ..initializeTheme()
+          ..initializeQuranReaderName(),
+      ),
+      ChangeNotifierProvider<QuranProvider>(
+        create: (context) => QuranProvider(),
+      )
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -30,12 +48,13 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: const [
-        Locale('en'), // English
-        Locale('ar'), // Spanish
+        Locale('en'),
+        Locale('ar'),
       ],
-      locale: Locale(provider.Language),
+      locale: Locale(provider.getLanguage()),
       routes: {
-        HomeScreen.routeName: (_) => const HomeScreen(),
+        HomeScreen.routeName: (_) => ChangeNotifierProvider(
+            create: (context) => RadioProvider(), child: const HomeScreen()),
         SplashScreen.routeName: (_) => const SplashScreen(),
         QuranDetailsScreen.routeName: (_) => const QuranDetailsScreen(),
         HadethDetailsScreen.routeName: (_) => const HadethDetailsScreen(),
@@ -43,7 +62,7 @@ class MyApp extends StatelessWidget {
       initialRoute: SplashScreen.routeName,
       theme: LightTheme.themeData,
       darkTheme: DarkTheme.themeData,
-      themeMode: provider.theme,
+      themeMode: provider.getThemeMode(),
     );
   }
 }

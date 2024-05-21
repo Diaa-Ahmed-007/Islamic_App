@@ -11,6 +11,7 @@ class DarkTheme {
       iconTheme: IconThemeData(color: onPrimaryDark),
       backgroundColor: Colors.transparent,
       centerTitle: true,
+      elevation: 0,
       titleTextStyle: TextStyle(
           fontSize: 30, color: onPrimaryDark, fontWeight: FontWeight.w700),
     ),
@@ -46,7 +47,10 @@ class DarkTheme {
         displaySmall: TextStyle(
             color: primaryDark, fontSize: 25, fontWeight: FontWeight.w400),
         labelSmall: TextStyle(
-            color: onPrimaryDark, fontSize: 20, fontWeight: FontWeight.w400)),
+            color: onPrimaryDark, fontSize: 20, fontWeight: FontWeight.w400),
+        headlineSmall: const TextStyle(
+            fontSize: 22, color: Colors.white, fontWeight: FontWeight.w400)),
+
     colorScheme: ColorScheme.fromSeed(
       seedColor: primaryDark,
       primary: primaryDark,

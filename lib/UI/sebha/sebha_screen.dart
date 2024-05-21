@@ -11,7 +11,7 @@ class _SebhaWidgetState extends State<SebhaWidget> {
   int sebhaCounter = 0;
   int sebhaListIndex = 0;
   double rotate = 0;
-  List<String> Tsbeh = [
+  List<String> tsbeh = [
     'سبحان الله',
     "الحمدلله",
     'لا اله الا الله',
@@ -30,12 +30,13 @@ class _SebhaWidgetState extends State<SebhaWidget> {
               alignment: AlignmentDirectional.topCenter,
               children: [
                 Container(
-                    // margin: EdgeInsets.only(left: 40 ),
-                    padding: const EdgeInsets.only(left: 50),
-                    child: Image.asset(
-                      'assets/images/head of seb7a.png',
-                      color: Theme.of(context).colorScheme.primary,
-                    )),
+                  // margin: EdgeInsets.only(left: 40 ),
+                  padding: const EdgeInsets.only(left: 50),
+                  child: Image.asset(
+                    'assets/images/head of seb7a.png',
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
                 Transform.rotate(
                   angle: rotate,
                   child: Container(
@@ -76,7 +77,7 @@ class _SebhaWidgetState extends State<SebhaWidget> {
                 borderRadius: BorderRadius.circular(20),
                 color: Theme.of(context).colorScheme.primary),
             child: Text(
-              Tsbeh[sebhaListIndex],
+              tsbeh[sebhaListIndex],
               style: Theme.of(context).textTheme.displayLarge,
             ),
           )

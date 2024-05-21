@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:islamiy_app/UI/hadeth/models/hadeth_model.dart';
 import 'package:islamiy_app/UI/providers/settings_provider.dart';
-import 'package:islamiy_app/main.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class HadethDetailsScreen extends StatelessWidget {
   const HadethDetailsScreen({super.key});
   static const String routeName = 'HadethDetailsScreen';
   @override
   Widget build(BuildContext context) {
-     SettingsProvider provider = Provider.of<SettingsProvider>(context);
+    SettingsProvider provider = Provider.of<SettingsProvider>(context);
     HadethModel hadethDetails =
         ModalRoute.of(context)?.settings.arguments as HadethModel;
     return Container(
-      decoration:  BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
-          image: provider.theme==ThemeMode.dark
+          image: provider.currentTheme == 'dark'
               ? const AssetImage('assets/images/Dakbg.png')
               : const AssetImage('assets/images/bg3.png'),
         ),
@@ -23,8 +22,8 @@ class HadethDetailsScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-          title: const Text(
-            'Islami',
+          title:  Text(
+            AppLocalizations.of(context)!.islamy,
           ),
         ),
         body: hadethDetails.body.isEmpty

@@ -8,23 +8,29 @@ class LanguageSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SettingsProvider provider = Provider.of<SettingsProvider>(context);
+
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           selectedLanguage(
-              context, provider.Language == "en" ? 'English' : 'العربيه'),
+              context, provider.getLanguage() == "en" ? 'English' : 'العربيه'),
           const SizedBox(
             height: 15,
           ),
           InkWell(
               onTap: () {
-                provider
-                    .changeLanguage(provider.Language == "en" ? "ar" : "en");
+                provider.changeLanguage(
+                    provider.getLanguage() == "en" ? "ar" : "en");
+                provider.changeQuranReaderName(provider.getLanguage() == "ar"
+                    ? "Ahmed Amer"
+                    : "أحمد عامر");
+                Navigator.pop(context);
               },
               child: unSelectedLanguage(
-                  provider.Language == "en" ? 'العربيه' : 'English', context)),
+                  provider.getLanguage() == "en" ? 'العربيه' : 'English',
+                  context)),
         ],
       ),
     );
